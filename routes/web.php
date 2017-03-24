@@ -23,21 +23,17 @@ Route::group(array('as' => 'ProfitConversion::'), function()
 
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('Home');
 
     Route::get('ProfitConversion', function () {
-        return redirect()->route('ProfitConversion::view');
-    });
+        return view('ProfitConversion.view');
+        #return redirect()->route('ProfitConversion::view');
+    })->name('View');
 
 
-    Route::get('ProfitConversion/view', ['as' => 'view', function () {
-        return 'view';
+    Route::get('ProfitConversion/edit', ['as' => 'edit', function () {
+        return 'edit';
     }]);
 
 });
 
-/*
-Route::get('ProfitConversion', function () {
-    return view('ProfitConversion');
-});
-*/

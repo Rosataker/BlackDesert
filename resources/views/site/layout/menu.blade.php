@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>BlackDesert Tools</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -45,6 +45,22 @@
                 position: absolute;
                 left: 10px;
                 top: 18px;
+            }
+
+            .Breadcrumbs-left {
+                position: absolute;
+                left: 40px;
+                top: 38px;
+            }
+
+            .Breadcrumbs-font {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
             }
 
             .content {
