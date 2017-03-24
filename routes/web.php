@@ -11,18 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('login', function() {
-  // code here
-})->name('login');
 
 
-Route::get('ProfitConversion', function () {
-    return redirect()->route('ProfitConversion::view');
-});
 
 
 
@@ -30,15 +20,20 @@ Route::get('ProfitConversion', function () {
 
 Route::group(array('as' => 'ProfitConversion::'), function()
 {
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('ProfitConversion', function () {
+        return redirect()->route('ProfitConversion::view');
+    });
+
+
     Route::get('ProfitConversion/view', ['as' => 'view', function () {
         return 'view';
     }]);
 
-    Route::get('user/profile', function()
-    {
-    	return 'user/profile';
-        // Has Auth Filter
-    });
 });
 
 /*
