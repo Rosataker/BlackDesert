@@ -18,3 +18,31 @@ Route::get('/', function () {
 Route::get('login', function() {
   // code here
 })->name('login');
+
+
+Route::get('ProfitConversion', function () {
+    return redirect()->route('ProfitConversion::view');
+});
+
+
+
+
+
+Route::group(array('as' => 'ProfitConversion::'), function()
+{
+    Route::get('ProfitConversion/view', ['as' => 'view', function () {
+        return 'view';
+    }]);
+
+    Route::get('user/profile', function()
+    {
+    	return 'user/profile';
+        // Has Auth Filter
+    });
+});
+
+/*
+Route::get('ProfitConversion', function () {
+    return view('ProfitConversion');
+});
+*/
