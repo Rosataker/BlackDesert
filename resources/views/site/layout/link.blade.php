@@ -1,5 +1,5 @@
                 <div class="top-left links">
-                    <a href="/ProfitConversion/">利潤換算庫</a>
+                    <a href="/ProfitConversion">利潤數據庫</a>
                     <a href="/">Home</a>
                 </div>
 

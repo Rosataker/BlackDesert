@@ -1,15 +1,15 @@
 @extends('site.layout.menu')
 
-@section('Breadcrumbs','利潤換算庫-瀏覽頁' )
+@section('Breadcrumbs','利潤數據庫-瀏覽頁' )
 
 @section('content')
      <div class="container">
         <div class="col-sm-offset-2 col-sm-8">
+        	@if (@$status)
             <div class="panel panel-default">
                 <div class="panel-heading" style="color:#000;font-family:monospace">
                     New ProfitConversion
                 </div>
-
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('common.errors')
@@ -54,9 +54,18 @@
                     </form>
                 </div>
             </div>
+            @endif
+
+			@if (@!$status)
+            <form action="{{ url('ProfitConversion/add') }}" method="GET">
+            	{{ csrf_field() }}
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-btn fa-plus"></i> Add ProfitConversion
+                </button>
+            </form>
+            @endif
             <!-- Current ProfitConversions -->
             @if (count(@$ProfitConversion_Class) > 0)
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Current ProfitConversions
@@ -78,8 +87,8 @@
                                         <td class="table-text"><div>{{ $ProfitConversion_view->amount }}</div></td>
 
                                         <!-- ProfitConversion Delete Button -->
-                                        <td >
-                                            <form action="{{ url('ProfitConversion/'.$ProfitConversion_view->id) }}" method="GET">
+            	                            <td >
+                                            <form action="{{ url('ProfitConversion/edit/'.$ProfitConversion_view->id) }}" method="GET">
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="fa fa-btn fa-plus"></i> Edit
@@ -87,7 +96,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{ url('ProfitConversion/'.$ProfitConversion_view->id) }}" method="POST">
+                                            <form action="{{ url('ProfitConversion/del/'.$ProfitConversion_view->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-danger">
@@ -99,7 +108,7 @@
                                 @endforeach					
                             </tbody>
                         </table>
-                                                
+
                         {!! $ProfitConversion_Class->links() !!}                        
                     </div>
                 </div>

@@ -22,7 +22,7 @@ use App\ProfitConversion;
 use Illuminate\Http\Request;
 Route::group(['middleware' => 'web'], function(){
 
-    Route::get('ProfitConversion', function () {
+    Route::get('/ProfitConversion', function (  ) {
         return view('ProfitConversion.view', [
             'ProfitConversion_Class' => ProfitConversion::orderBy('created_at', 'desc')->paginate(5),
         ]);
@@ -50,14 +50,20 @@ Route::group(['middleware' => 'web'], function(){
         return redirect()->route('ProfitConversion_View');
     });
 
-    Route::get('/ProfitConversion/{id}', function ($id) {
+    Route::get('/ProfitConversion/add', function () {
+        return view('ProfitConversion.view',[
+            'status'=>1,
+        ]);
+    });
+
+    Route::get('/ProfitConversion/edit/{id}', function ($id) {
         return view('ProfitConversion.view', [
             'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get(),
             'button_str' => 'Edit ProfitConversion'
         ]);
     });
     
-    Route::delete('/ProfitConversion/{id}', function ($id) {
+    Route::delete('/ProfitConversion/del/{id}', function ($id) {
         ProfitConversion::findOrFail($id)->delete();
         return redirect()->route('ProfitConversion_View');
     });
