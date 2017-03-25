@@ -21,53 +21,52 @@ Route::get('/', function () {
 use App\ProfitConversion;
 use Illuminate\Http\Request;
 
-
-
 #Route::currentRouteName()
-Route::group(array('as' => 'ProfitConversion::'), function()
+Route::group(['middleware' => 'web'], function()
 {
-
 
     Route::get('ProfitConversion', function () {
         return view('ProfitConversion.view', [
-            'ProfitConversion' => ProfitConversion::orderBy('created_at', 'asc')->get()
+            'ProfitConversion_view' => ProfitConversion::orderBy('created_at', 'asc')->get()
         ]);
-        #return redirect()->route('ProfitConversion::view');
-    })->name('View');
+    })->name('ProfitConversion_View');
 
-    /**
-     * Add New Task
-     */
 
     Route::post('/ProfitConversion', function (Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
+            'price' => 'required',
+            'amount' => 'required',
         ]);
 
 
         if ($validator->fails()) {
-            return redirect('/')
+            return redirect()->route('ProfitConversion_View')
                 ->withInput()
                 ->withErrors($validator);
         }
 
-        
-        $ProfitConversion->name = $request->name;
-        $ProfitConversion->save();
-
-        
-        
-#        return redirect()->route('ProfitConversion::view');
+        $ProfitConversion_view = new ProfitConversion;
+        $ProfitConversion_view->name = $request->name;
+        $ProfitConversion_view->price = $request->price;
+        $ProfitConversion_view->amount = $request->amount;
+        $ProfitConversion_view->save();
+       
+        return redirect()->route('ProfitConversion_View');
     });
-
-    /**
-     * Delete Task
-     */
     
     Route::delete('/ProfitConversion/{id}', function ($id) {
         ProfitConversion::findOrFail($id)->delete();
-
-        return redirect()->route('ProfitConversion::view');
+        #$deleted = DB::delete('delete from users');
+        return redirect()->route('ProfitConversion_View');
     });
+    
+    Route::match(['get', 'post'],'/ProfitConversion/{id}', function ($id) {
+        return view('ProfitConversion.view', [
+            'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get()         
+        ]);
+
+        #return redirect()->route('ProfitConversion_View');
+    });    
 
 });
