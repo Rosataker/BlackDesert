@@ -39,18 +39,17 @@ Route::group(['middleware' => 'web'], function()
             'amount' => 'required',
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->route('ProfitConversion_View')
                 ->withInput()
                 ->withErrors($validator);
         }
 
-        $ProfitConversion_view = new ProfitConversion;
-        $ProfitConversion_view->name = $request->name;
-        $ProfitConversion_view->price = $request->price;
-        $ProfitConversion_view->amount = $request->amount;
-        $ProfitConversion_view->save();
+        $ProfitConversionClass = new ProfitConversion;
+        $ProfitConversionClass->name = $request->name;
+        $ProfitConversionClass->price = $request->price;
+        $ProfitConversionClass->amount = $request->amount;
+        $ProfitConversionClass->save();
        
         return redirect()->route('ProfitConversion_View');
     });
@@ -62,8 +61,14 @@ Route::group(['middleware' => 'web'], function()
     });
     
     Route::match(['get', 'post'],'/ProfitConversion/{id}', function ($id) {
+
+        $ProfitConversionClass = new ProfitConversion;
+        var_dump($request);
+        
         return view('ProfitConversion.view', [
-            'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get()         
+            'ProfitConversion_edit' =>$ProfitConversionClass->EditView($id)
+            #'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get()
+
         ]);
 
         #return redirect()->route('ProfitConversion_View');

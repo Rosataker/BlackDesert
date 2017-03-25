@@ -16,6 +16,17 @@
                     @include('common.errors')
                     <!-- New ProfitConversion Form -->
                     @if (count(@$ProfitConversion_edit) > 0)
+                	
+<?php
+
+var_dump($ProfitConversion_edit);
+foreach ($ProfitConversion_edit as $ProfitConversion_edit){
+//$ProfitConversion_edit=$ProfitConversion_edit;
+var_dump($ProfitConversion_edit);
+}
+?>
+
+                    
                     	我有東西哦                    	
                     @endif
                     <form action="{{ url('ProfitConversion')}}" method="POST" class="form-horizontal">
@@ -25,20 +36,20 @@
                         <div class="form-group">
                             <label for="ProfitConversion-name" class="col-sm-3 control-label">Name</label>
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="ProfitConversion-name" class="form-control" value="{{ old('name') }}">
+                                <input type="text" name="name" id="ProfitConversion-name" class="form-control" value="{{ old('name') }}"> $ProfitConversion_edit->name }}
                             </div>
 
                         </div>
                         <div class="form-group">
                             <label for="ProfitConversion-price" class="col-sm-3 control-label">price</label>
                             <div class="col-sm-6">
-                                <input type="text" name="price" id="ProfitConversion-price" class="form-control" value="{{ old('price') }}">
+                                <input type="text" name="price" id="ProfitConversion-price" class="form-control" value="{{ old('price') }}"> $ProfitConversion_edit->price }}
                             </div>                            
                         </div>
                        <div class="form-group">
                             <label for="ProfitConversion-amount" class="col-sm-3 control-label">amount</label>
                             <div class="col-sm-6">
-                                <input type="text" name="amount" id="ProfitConversion-amount" class="form-control" value="{{ old('amount') }}">
+                                <input type="text" name="amount" id="ProfitConversion-amount" class="form-control" value="{{ old('amount') }}"> $ProfitConversion_edit->amount }}
                             </div>                            
                         </div>
                         <!-- Add ProfitConversion Button -->
