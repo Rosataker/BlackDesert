@@ -20,8 +20,6 @@ Route::get('/', function () {
 
 use App\ProfitConversion;
 use Illuminate\Http\Request;
-
-#Route::currentRouteName()
 Route::group(['middleware' => 'web'], function()
 {
 
@@ -33,6 +31,8 @@ Route::group(['middleware' => 'web'], function()
 
 
     Route::post('/ProfitConversion', function (Request $request) {
+
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'price' => 'required',
@@ -45,12 +45,15 @@ Route::group(['middleware' => 'web'], function()
                 ->withErrors($validator);
         }
 
-        $ProfitConversionClass = new ProfitConversion;
+        $ProfitConversionClass = ($request->id) ? ProfitConversion::find($request->id) : new ProfitConversion;
+
+
+
         $ProfitConversionClass->name = $request->name;
         $ProfitConversionClass->price = $request->price;
-        $ProfitConversionClass->amount = $request->amount;
+        $ProfitConversionClass->amount = $request->amount;        
         $ProfitConversionClass->save();
-       
+
         return redirect()->route('ProfitConversion_View');
     });
     
@@ -60,18 +63,11 @@ Route::group(['middleware' => 'web'], function()
         return redirect()->route('ProfitConversion_View');
     });
     
-    Route::match(['get', 'post'],'/ProfitConversion/{id}', function ($id) {
-
-        $ProfitConversionClass = new ProfitConversion;
-        var_dump($request);
-        
+    Route::get('/ProfitConversion/{id}', function ($id) {
         return view('ProfitConversion.view', [
-            'ProfitConversion_edit' =>$ProfitConversionClass->EditView($id)
-            #'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get()
-
+            'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get(),
+            'button_str' => 'Edit ProfitConversion'
         ]);
-
-        #return redirect()->route('ProfitConversion_View');
     });    
 
 });
