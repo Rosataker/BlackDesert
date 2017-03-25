@@ -55,7 +55,8 @@
                 </div>
             </div>
             <!-- Current ProfitConversions -->
-            @if (count(@$ProfitConversion_view) > 0)
+            @if (count(@$ProfitConversion_Class) > 0)
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Current ProfitConversions
@@ -70,7 +71,7 @@
                                 <th width="20%" colspan="2">&nbsp;</th>
                             </thead>
                             <tbody>
-                                @foreach ($ProfitConversion_view as $ProfitConversion_view)
+                                @foreach ($ProfitConversion_Class as $ProfitConversion_view)
                                     <tr>
                                         <td class="table-text"><div>{{ $ProfitConversion_view->name }}</div></td>
                                         <td class="table-text"><div>{{ $ProfitConversion_view->price }}</div></td>
@@ -95,9 +96,11 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach					
                             </tbody>
                         </table>
+                                                
+                        {!! $ProfitConversion_Class->links() !!}                        
                     </div>
                 </div>
             @endif

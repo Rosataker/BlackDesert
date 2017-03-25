@@ -20,19 +20,15 @@ Route::get('/', function () {
 
 use App\ProfitConversion;
 use Illuminate\Http\Request;
-Route::group(['middleware' => 'web'], function()
-{
+Route::group(['middleware' => 'web'], function(){
 
     Route::get('ProfitConversion', function () {
         return view('ProfitConversion.view', [
-            'ProfitConversion_view' => ProfitConversion::orderBy('created_at', 'asc')->get()
+            'ProfitConversion_Class' => ProfitConversion::orderBy('created_at', 'desc')->paginate(5),
         ]);
     })->name('ProfitConversion_View');
 
-
     Route::post('/ProfitConversion', function (Request $request) {
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'price' => 'required',
@@ -46,9 +42,6 @@ Route::group(['middleware' => 'web'], function()
         }
 
         $ProfitConversionClass = ($request->id) ? ProfitConversion::find($request->id) : new ProfitConversion;
-
-
-
         $ProfitConversionClass->name = $request->name;
         $ProfitConversionClass->price = $request->price;
         $ProfitConversionClass->amount = $request->amount;        
@@ -56,18 +49,19 @@ Route::group(['middleware' => 'web'], function()
 
         return redirect()->route('ProfitConversion_View');
     });
-    
-    Route::delete('/ProfitConversion/{id}', function ($id) {
-        ProfitConversion::findOrFail($id)->delete();
-        #$deleted = DB::delete('delete from users');
-        return redirect()->route('ProfitConversion_View');
-    });
-    
+
     Route::get('/ProfitConversion/{id}', function ($id) {
         return view('ProfitConversion.view', [
             'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get(),
             'button_str' => 'Edit ProfitConversion'
         ]);
-    });    
+    });
+    
+    Route::delete('/ProfitConversion/{id}', function ($id) {
+        ProfitConversion::findOrFail($id)->delete();
+        return redirect()->route('ProfitConversion_View');
+    });
+    
+
 
 });
