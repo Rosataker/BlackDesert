@@ -3,7 +3,7 @@
                     <a href="/">Home</a>
                 </div>
 
-            @if (Route::currentRouteName()!='ProfitConversion::Home')
+            @if (Route::currentRouteName())
                 <div class="Breadcrumbs-left links">
                     <span class="Breadcrumbs-font">現在位置： @yield('Breadcrumbs') </span>
                 </div>

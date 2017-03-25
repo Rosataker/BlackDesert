@@ -13,27 +13,61 @@
 
 
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+use App\ProfitConversion;
+use Illuminate\Http\Request;
 
 
 
-
-
+#Route::currentRouteName()
 Route::group(array('as' => 'ProfitConversion::'), function()
 {
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('Home');
 
     Route::get('ProfitConversion', function () {
-        return view('ProfitConversion.view');
+        return view('ProfitConversion.view', [
+            'ProfitConversion' => ProfitConversion::orderBy('created_at', 'asc')->get()
+        ]);
         #return redirect()->route('ProfitConversion::view');
     })->name('View');
 
+    /**
+     * Add New Task
+     */
 
-    Route::get('ProfitConversion/edit', ['as' => 'edit', function () {
-        return 'edit';
-    }]);
+    Route::post('/ProfitConversion', function (Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        
+        $ProfitConversion->name = $request->name;
+        $ProfitConversion->save();
+
+        
+        
+#        return redirect()->route('ProfitConversion::view');
+    });
+
+    /**
+     * Delete Task
+     */
+    
+    Route::delete('/ProfitConversion/{id}', function ($id) {
+        ProfitConversion::findOrFail($id)->delete();
+
+        return redirect()->route('ProfitConversion::view');
+    });
 
 });
-
