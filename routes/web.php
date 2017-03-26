@@ -59,7 +59,8 @@ Route::group(['middleware' => 'web'], function(){
     Route::get('/ProfitConversion/edit/{id}', function ($id) {
         return view('ProfitConversion.view', [
             'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get(),
-            'button_str' => 'Edit ProfitConversion'
+            'button_str' => 'Edit ProfitConversion',
+            'status'=>1,
         ]);
     });
     

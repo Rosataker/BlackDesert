@@ -21,6 +21,8 @@ class CreateProfitConversionTable extends Migration
             
             $table->timestamps();
         });
+
+
     }
 
     /**
