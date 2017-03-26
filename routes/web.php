@@ -44,7 +44,8 @@ Route::group(['middleware' => 'web'], function(){
         $ProfitConversionClass = ($request->id) ? ProfitConversion::find($request->id) : new ProfitConversion;
         $ProfitConversionClass->name = $request->name;
         $ProfitConversionClass->price = $request->price;
-        $ProfitConversionClass->amount = $request->amount;        
+        $ProfitConversionClass->amount = $request->amount;
+        $ProfitConversionClass->count = ($request->count) ? $request->count : '' ;
         $ProfitConversionClass->save();
 
         return redirect()->route('ProfitConversion_View');

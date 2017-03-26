@@ -41,6 +41,12 @@
                                 <input type="text" name="amount" id="ProfitConversion-amount" class="form-control" value="{{$ProfitConversion_edit->amount or old('amount') }}">
                             </div>                            
                         </div>
+                       <div class="form-group">
+                            <label for="ProfitConversion-count" class="col-sm-3 control-label">count</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="count" id="ProfitConversion-count" class="form-control" value="{{$ProfitConversion_edit->count or old('count') }}">
+                            </div>                            
+                        </div>
 
                         <!-- Add ProfitConversion Button -->
                         <div class="form-group">
