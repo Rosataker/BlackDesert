@@ -28,19 +28,32 @@
                                 <input type="text" name="price" id="ProfitConversion-price" class="form-control" value="{{$ProfitConversion_edit->price or old('price') }}">
                             </div>                            
                         </div>
-                       <div class="form-group">
+                        <div class="form-group">
                             <label for="ProfitConversion-amount" class="col-sm-3 control-label">amount</label>
                             <div class="col-sm-6">
                                 <input type="text" name="amount" id="ProfitConversion-amount" class="form-control" value="{{$ProfitConversion_edit->amount or old('amount') }}">
                             </div>                            
                         </div>
-                       <div class="form-group">
+                        <div class="form-group">
                             <label for="ProfitConversion-count" class="col-sm-3 control-label">count</label>
                             <div class="col-sm-6">
                                 <input type="text" name="count" id="ProfitConversion-count" class="form-control" value="{{$ProfitConversion_edit->count or old('count') }}">
                             </div>                            
                         </div>
 
+                        @if (count(@$ProfitConversion_edit) > 0)
+                        <div class="form-group">
+
+                            <label for="ProfitConversion-rawmaterial" class="col-sm-3 control-label">原料</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" name="rawmaterial" value="{{$ProfitConversion_edit->rawmaterial or old('rawmaterial') }}">
+                            </div>          
+                            <button type="button" class="btn btn-primary">
+                                <i class="fa fa-btn fa-plus"></i> Add
+                            </button>
+
+                        </div>
+                        @endif
                         <!-- Add ProfitConversion Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">   

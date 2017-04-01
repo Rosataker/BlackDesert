@@ -57,6 +57,7 @@ class ProfitConversionController extends Controller
         $ProfitConversionClass->price = $request->price;
         $ProfitConversionClass->amount = $request->amount;
         $ProfitConversionClass->count = ($request->count) ? $request->count : '' ;
+        $ProfitConversionClass->updated_at = date_timestamp_get(date_create());
         $ProfitConversionClass->save();
 
         return redirect()->action('ProfitConversionController@index');
