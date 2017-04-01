@@ -14,12 +14,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
+
 Route::group(['prefix'=>'ProfitConversion'], function()
 {
     Route::get('/', 'ProfitConversionController@index');
     Route::get('/add', 'ProfitConversionController@create');
     Route::get('/edit/{id}', 'ProfitConversionController@edit');
-    
+
     Route::post('/', 'ProfitConversionController@store');
 
     Route::delete('/del/{id}', 'ProfitConversionController@destroy');

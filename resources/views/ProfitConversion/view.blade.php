@@ -88,7 +88,13 @@
                             <tbody>
                                 @foreach ($ProfitConversion_Class as $ProfitConversion_view)
                                     <tr>
-                                        <td class="table-text"><div>{{ $ProfitConversion_view->name }}</div></td>
+                                        <td class="table-text">
+                                            <div>
+                                                <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" data-content="Some content inside the popover">
+                                                    {{ $ProfitConversion_view->name }}
+                                                </a>
+                                            </div>
+                                        </td>
                                         <td class="table-text"><div>{{ $ProfitConversion_view->price }}</div></td>
                                         <td class="table-text"><div>{{ $ProfitConversion_view->amount }}</div></td>
 
@@ -121,4 +127,12 @@
             @endif
         </div>
     </div>
+
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+</script>
+
 @endsection
