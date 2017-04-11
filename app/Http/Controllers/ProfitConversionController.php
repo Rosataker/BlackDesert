@@ -52,12 +52,26 @@ class ProfitConversionController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
+
+/*
+        if(is_array($request->rawmaterial)){
+            foreach ($request->rawmaterial as $key => $value) {
+               $RawmaterialSaveData[$key]=$value;
+            }
+            $RawmaterialSaveData=serialize($RawmaterialSaveData);
+
+        }
+        */
+       //         var_dump($RawmaterialSaveData);
+      //  exit;
+
         $ProfitConversionClass = ($request->id) ? ProfitConversion::find($request->id) : new ProfitConversion;
         $ProfitConversionClass->name = $request->name;
         $ProfitConversionClass->price = $request->price;
         $ProfitConversionClass->amount = $request->amount;
         $ProfitConversionClass->count = ($request->count) ? $request->count : '' ;
         $ProfitConversionClass->updated_at = date_timestamp_get(date_create());
+        $ProfitConversionClass->rawmaterial = '';
         $ProfitConversionClass->save();
 
         return redirect()->action('ProfitConversionController@index');

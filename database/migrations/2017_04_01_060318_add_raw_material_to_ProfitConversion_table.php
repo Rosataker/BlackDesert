@@ -14,7 +14,7 @@ class AddRawMaterialToProfitConversionTable extends Migration
     public function up()
     {
         Schema::table('ProfitConversion', function (Blueprint $table) {
-            $table->string('rawmaterial');   
+            $table->text('rawmaterial');   
         });
     }
 
@@ -26,7 +26,7 @@ class AddRawMaterialToProfitConversionTable extends Migration
     public function down()
     {
         Schema::table('ProfitConversion', function (Blueprint $table) {
-            //
+            Schema::drop('ProfitConversion');
         });
     }
 }
