@@ -53,7 +53,7 @@ class ProfitConversionController extends Controller
                 ->withErrors($validator);
         }
 
-/*
+
         if(is_array($request->rawmaterial)){
             foreach ($request->rawmaterial as $key => $value) {
                $RawmaterialSaveData[$key]=$value;
@@ -61,7 +61,7 @@ class ProfitConversionController extends Controller
             $RawmaterialSaveData=serialize($RawmaterialSaveData);
 
         }
-        */
+       
        //         var_dump($RawmaterialSaveData);
       //  exit;
 
@@ -71,7 +71,7 @@ class ProfitConversionController extends Controller
         $ProfitConversionClass->amount = $request->amount;
         $ProfitConversionClass->count = ($request->count) ? $request->count : '' ;
         $ProfitConversionClass->updated_at = date_timestamp_get(date_create());
-        $ProfitConversionClass->rawmaterial = '';
+        $ProfitConversionClass->rawmaterial = ($RawmaterialSaveData) ? $RawmaterialSaveData : '' ;;
         $ProfitConversionClass->save();
 
         return redirect()->action('ProfitConversionController@index');
