@@ -94,12 +94,18 @@ class ProfitConversionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
+
+       $ProfitConversion_edit= ProfitConversion::where('id', ['id' => $id])->get();
+       $ProfitConversion_edit=$ProfitConversion_edit[0];
+
+       $rawmaterialData=unserialize($ProfitConversion_edit->rawmaterial);
+
         return view('ProfitConversion.view', [
-            'ProfitConversion_edit' => ProfitConversion::where('id', ['id' => $id])->get(),
+            'ProfitConversion_edit' => $ProfitConversion_edit,
             'button_str' => 'Edit ProfitConversion',
             'status'=>1,
+            'rawmaterialData'=>$rawmaterialData,
         ]);
     }
 
