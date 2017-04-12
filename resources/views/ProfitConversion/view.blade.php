@@ -38,7 +38,7 @@
                                     <tr>
                                         <td class="table-text">
                                             <div>
-                                                <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" data-content="Some content inside the popover">
+                                                <a href="javascript:void(0)" data-toggle="popover" data-html="true"  data-trigger="hover" data-content="{{ $ProfitConversion_view->rawmaterial }}">
                                                     {{ $ProfitConversion_view->name }}
                                                 </a>
                                             </div>

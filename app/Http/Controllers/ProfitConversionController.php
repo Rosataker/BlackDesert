@@ -15,10 +15,26 @@ class ProfitConversionController extends Controller
      */
     public function index()
     {
+        $ProfitConversion_Class=ProfitConversion::orderBy('created_at', 'desc')->paginate(5);
+
+        foreach ($ProfitConversion_Class as $key => $ProfitConversion_View) {
+            $rawmaterialData=unserialize($ProfitConversion_View->rawmaterial);
+            if(is_array($rawmaterialData)){
+                $ret = $Recont='';
+                foreach ($rawmaterialData as $Nullkey => $value) {
+                    $Recont = '原料：<font color=red>'.$value['name'] . '</font> <BR> 金額：<font color=red>' . $value['price'] . '</font><BR><HR>';
+                    $ret=$ret. $Recont ;
+                }
+                $ProfitConversion_Class[$key]->rawmaterial=$ret;
+            }
+        }
         return view('ProfitConversion.view', [
-            'ProfitConversion_Class' => ProfitConversion::orderBy('created_at', 'desc')->paginate(5),
+            'ProfitConversion_Class' => $ProfitConversion_Class,
         ]);
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,9 +77,7 @@ class ProfitConversionController extends Controller
             $RawmaterialSaveData=serialize($RawmaterialSaveData);
 
         }
-       
-       //         var_dump($RawmaterialSaveData);
-      //  exit;
+
 
         $ProfitConversionClass = ($request->id) ? ProfitConversion::find($request->id) : new ProfitConversion;
         $ProfitConversionClass->name = $request->name;
@@ -71,7 +85,7 @@ class ProfitConversionController extends Controller
         $ProfitConversionClass->amount = $request->amount;
         $ProfitConversionClass->count = ($request->count) ? $request->count : '' ;
         $ProfitConversionClass->updated_at = date_timestamp_get(date_create());
-        $ProfitConversionClass->rawmaterial = ($RawmaterialSaveData) ? $RawmaterialSaveData : '' ;;
+        $ProfitConversionClass->rawmaterial = (@$RawmaterialSaveData) ? $RawmaterialSaveData : '' ;;
         $ProfitConversionClass->save();
 
         return redirect()->action('ProfitConversionController@index');
