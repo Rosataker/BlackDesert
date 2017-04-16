@@ -15,7 +15,17 @@ class ProfitConversionController extends Controller
      */
     public function index()
     {
-        $ProfitConversion_Class=ProfitConversion::orderBy('created_at', 'desc')->paginate(5);
+        if(session()->has('search_str')){
+            $search_str=session()->get('search_str');
+            $ProfitConversion_Class=ProfitConversion::where('name','like','%'.$search_str[0].'%')
+            ->orderBy('created_at', 'desc')->paginate(5);
+
+        }else{
+            $ProfitConversion_Class=ProfitConversion::orderBy('created_at', 'desc')->paginate(5);    
+        }
+
+
+        
 
         foreach ($ProfitConversion_Class as $key => $ProfitConversion_View) {
             $rawmaterialData=unserialize($ProfitConversion_View->rawmaterial);
@@ -30,6 +40,8 @@ class ProfitConversionController extends Controller
         }
         return view('ProfitConversion.view', [
             'ProfitConversion_Class' => $ProfitConversion_Class,
+            'search_str' => $search_str[0],
+
         ]);
     }
 
@@ -91,15 +103,11 @@ class ProfitConversionController extends Controller
         return redirect()->action('ProfitConversionController@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function search(Request $request)
+    {            
+        $request->session()->forget('search_str');
+        $request->session()->push('search_str', $request->search_str);
+        return redirect()->action("ProfitConversionController@index");
     }
 
     /**

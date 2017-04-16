@@ -8,5 +8,4 @@ class ProfitConversion extends Model
 {
      protected $table = 'ProfitConversion';
 
-
 }

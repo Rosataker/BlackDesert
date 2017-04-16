@@ -11,7 +11,41 @@
 
 
             <!-- Current ProfitConversions -->
+
 			@if (@!$status)
+
+                <div class="panel panel-default">
+
+                        <table class="table table-striped ProfitConversion-table" border="0">
+                                <tr>
+                                    <th style="font-size: 25px">關鍵字搜尋</th>
+                                    <td class="table-text">     
+                                    		<form action="{{ url('ProfitConversion/search') }}" method="POST">                               	
+                                    		<input type="text" name="search_str" class="form-control" value="{{$search_str}}">                                    	
+                                   	</td>
+                                    <td  align="right">
+            								
+            									{{ csrf_field() }}
+                								<button type="submit" class="btn btn-success">
+                    								<i class="fa fa-btn fa-search"></i> Search
+                								</button>
+             								</form>
+                                    </td>   
+                                     <td  align="right">
+            								<form action="{{ url('ProfitConversion/search') }}" method="GET">
+            									{{ csrf_field() }}
+                								<button type="submit" class="btn btn-danger">
+                    								<i class="fa fa-btn fa-refresh"></i> Reset
+                								</button>
+            								</form>
+                                    </td>                                
+                                </tr>                               				
+                        </table>
+    
+                </div>
+
+
+
             <form action="{{ url('ProfitConversion/add') }}" method="GET">
             	{{ csrf_field() }}
                 <button type="submit" class="btn btn-primary">
