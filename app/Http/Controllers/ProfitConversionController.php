@@ -125,7 +125,7 @@ class ProfitConversionController extends Controller
 
         return view('ProfitConversion.view', [
             'ProfitConversion_edit' => $ProfitConversion_edit,
-            'button_str' => 'Edit ProfitConversion',
+            'button_str' => '修改 物品',
             'status'=>1,
             'rawmaterialData'=>$rawmaterialData,
         ]);

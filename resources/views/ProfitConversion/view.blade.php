@@ -49,22 +49,19 @@
             <form action="{{ url('ProfitConversion/add') }}" method="GET">
             	{{ csrf_field() }}
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-btn fa-plus"></i> Add ProfitConversion
+                    <i class="fa fa-btn fa-plus"></i> 增加物品
                 </button>
             </form>
             @endif
             @if (count(@$ProfitConversion_Class) > 0)
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Current ProfitConversions
-                    </div>
 
                     <div class="panel-body">
                         <table class="table table-striped ProfitConversion-table" >
                             <thead>
-                                <th>name</th>
-                                <th>price</th>
-                                <th>amount</th>
+                                <th>名稱</th>
+                                <th>價格</th>
+                                <th>數量</th>
                                 <th width="20%" colspan="2">&nbsp;</th>
                             </thead>
                             <tbody>

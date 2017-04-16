@@ -1,7 +1,7 @@
 @if (@$status)
             <div class="panel panel-default">
                 <div class="panel-heading" style="color:#000;font-family:monospace">
-                    New ProfitConversion
+                    新增  物品
                 </div>
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
@@ -13,25 +13,25 @@
                         {{ csrf_field() }}
                         <!-- ProfitConversion Name -->
                         <div class="form-group">
-                            <label for="ProfitConversion-name" class="col-sm-3 control-label">Name</label>
+                            <label for="ProfitConversion-name" class="col-sm-3 control-label">名稱</label>
                             <div class="col-sm-6">
                                 <input type="text" name="name" id="ProfitConversion-name" class="form-control" value="{{ $ProfitConversion_edit->name or old('name') }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="ProfitConversion-price" class="col-sm-3 control-label">price</label>
+                            <label for="ProfitConversion-price" class="col-sm-3 control-label">價格</label>
                             <div class="col-sm-6">
                                 <input type="text" name="price" id="ProfitConversion-price" class="form-control" value="{{$ProfitConversion_edit->price or old('price') }}">
                             </div>                            
                         </div>
                         <div class="form-group">
-                            <label for="ProfitConversion-amount" class="col-sm-3 control-label">amount</label>
+                            <label for="ProfitConversion-amount" class="col-sm-3 control-label">數量</label>
                             <div class="col-sm-6">
                                 <input type="text" name="amount" id="ProfitConversion-amount" class="form-control" value="{{$ProfitConversion_edit->amount or old('amount') }}">
                             </div>                            
                         </div>
                         <div class="form-group">
-                            <label for="ProfitConversion-count" class="col-sm-3 control-label">count</label>
+                            <label for="ProfitConversion-count" class="col-sm-3 control-label">備註</label>
                             <div class="col-sm-6">
                                 <input type="text" name="count" id="ProfitConversion-count" class="form-control" value="{{$ProfitConversion_edit->count or old('count') }}">
                             </div>                            
